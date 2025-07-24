@@ -1,0 +1,36 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+    Node(int d) {data = d; next = null; }
+}
+*/
+
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        // code here.
+         Node sp = head;  // slow pointer
+        Node fp = head;  // fast pointer
+
+        while (fp != null && fp.next != null) {
+            sp = sp.next;
+            fp = fp.next.next;
+
+            if (sp == fp) {
+                // Step 2: Loop detected, count loop length
+                int count = 1;
+                Node temp3 = sp.next;
+                while (temp3 != sp) {
+                    count++;
+                    temp3 = temp3.next;
+                }
+                return count;
+            }
+        }
+
+        // No loop found
+        return 0;
+    }
+}
