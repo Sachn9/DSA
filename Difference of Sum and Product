@@ -1,0 +1,21 @@
+import java.util.Scanner; 
+import java.io.*; 
+
+public class Main {
+    public static void main(String[] args) {
+        // write your code here
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int sum=0;
+        int mul=1;
+
+        while(n != 0){
+            int val=n%10;
+            sum=sum+val;
+            mul=mul*val;
+            n=n/10;
+        }
+        int ans=mul-sum;
+        System.out.println(ans);
+    }
+}
