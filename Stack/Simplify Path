@@ -1,0 +1,30 @@
+class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> st = new Stack<>();
+
+        // Step 1: path ko split karo
+        String[] parts = path.split("/");
+
+        // Step 2: process each part
+        for (String part : parts) {
+            if (part.equals("") || part.equals(".")) {
+                continue; // ignore empty or "."
+            } else if (part.equals("..")) {
+                if (!st.isEmpty()) {
+                    st.pop(); // go back one step
+                }
+            } else {
+                st.push(part); // valid folder
+            }
+        }
+
+        // Step 3: build final path
+        StringBuilder sb = new StringBuilder();
+        for (String dir : st) {
+            sb.append("/").append(dir);
+        }
+
+        // if stack is empty, return "/"
+        return sb.length() > 0 ? sb.toString() : "/";
+    }
+}
