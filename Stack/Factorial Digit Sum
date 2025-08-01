@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution 
+{
+
+    static String factDigitSum(int n) {
+        //Write your code here
+        // Step 1: Factorials of digits 0-9
+        int[] fact = new int[10];
+        fact[0] = 1;
+        for (int i = 1; i <= 9; i++) {
+            fact[i] = fact[i - 1] * i;
+        }
+
+        // Step 2: List to store selected digits
+        List<Integer> digits = new ArrayList<>();
+
+        // Step 3: Start from digit 9 to 1 (greedy)
+        for (int d = 9; d >= 1; d--) {
+            while (n >= fact[d]) {
+                n -= fact[d];
+                digits.add(d);
+            }
+        }
+
+        // Step 4: Sort digits to get lexicographically smallest number
+        Collections.sort(digits);
+
+        // Step 5: Build result string
+        StringBuilder sb = new StringBuilder();
+        for (int digit : digits) {
+            sb.append(digit);
+        }
+
+        return sb.toString();
+      
+    }
+}
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String ans = Solution.factDigitSum(n);
+        System.out.println(ans);
+    }
+}
