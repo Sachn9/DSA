@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+    public static void parenthesisChecker(String s)
+        {
+        //Write your code here
+        Stack<Character> stack = new Stack<>();
+        
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } else {
+                if (stack.isEmpty()){
+                    System.out.println("0");
+                    return;
+
+                }
+
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') ||
+                    (ch == '}' && top != '{') ||
+                    (ch == ']' && top != '[')) {
+                    System.out.println("0");
+                    return;
+                }
+            }
+        }
+        if(stack.size() ==0){
+            System.out.println("1");
+        }else{
+            System.out.println("0");
+
+        }
+            
+
+        
+    }
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        parenthesisChecker(s);
+    }
+}
