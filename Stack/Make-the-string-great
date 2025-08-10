@@ -1,0 +1,20 @@
+class Solution {
+    public String makeGood(String s) {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            // Agar last char exist karta hai aur bad pair hai to remove kar do
+            if (str.length() > 0 &&
+                Character.toLowerCase(str.charAt(str.length() - 1)) == Character.  toLowerCase(ch) &&
+                str.charAt(str.length() - 1) != ch) {
+                str.deleteCharAt(str.length() - 1); // remove last char
+            } else {
+                str.append(ch); // otherwise add current char
+            }
+       }
+
+       return str.toString();
+    }
+}
