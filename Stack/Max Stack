@@ -1,0 +1,60 @@
+import java.util.*;
+
+class MaxStack {
+    Stack<Integer> st;
+    Stack<Integer> maxSt; // extra stack for max values
+
+    public MaxStack() {
+        st = new Stack<>();
+        maxSt = new Stack<>();
+    }
+
+    public void Push(int value) {
+        st.push(value);
+        // maxSt में या तो current value push करो या last max को फिर से
+        if (maxSt.isEmpty() || value >= maxSt.peek()) {
+            maxSt.push(value);
+        } else {
+            maxSt.push(maxSt.peek());
+        }
+    }
+
+    public int Pop() {
+        maxSt.pop();
+        return st.pop();
+    }
+
+    public int Top() {
+        return st.peek();
+    }
+
+    public int getMax() {
+        return maxSt.peek();
+    }
+}
+
+
+public class Main {
+    public static void main(String args[]) {
+        
+        Scanner sc = new Scanner(System.in); 
+        int q = sc.nextInt(); 
+        
+        MaxStack maxst = new MaxStack(); 
+
+        while(q-- >0){
+            
+             int type = sc.nextInt(); 
+             if(type==1){
+                 int val = sc.nextInt(); 
+                 maxst.Push(val);  
+             }else if(type==2){
+                 maxst.Pop(); 
+             }else if(type==3){
+                 System.out.println(maxst.Top()); 
+             }else{
+                 System.out.println(maxst.getMax()); 
+             }
+        }
+    }
+}
