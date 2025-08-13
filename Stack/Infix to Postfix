@@ -1,0 +1,48 @@
+import java.util.*;
+
+
+
+class Solution {
+    static String infixToPostfix(String exp) {
+        StringBuilder out = new StringBuilder();
+        Stack<Character> st = new Stack<>();
+
+        for (int i = 0; i < exp.length(); i++) {
+            char ch = exp.charAt(i);
+
+            if (Character.isLetterOrDigit(ch)) {
+                out.append(ch);
+            } else if (ch == '(') {
+                st.push(ch);
+            } else if (ch == ')') {
+                while (!st.isEmpty() && st.peek() != '(') out.append(st.pop());
+                if (!st.isEmpty()) st.pop(); // remove '('
+            } else { // operator
+                while (!st.isEmpty() && st.peek() != '(' &&
+                       (prec(st.peek()) > prec(ch) || prec(st.peek()) == prec(ch))) {
+                    out.append(st.pop());      // equal precedence pops too -> left-assoc
+                }
+                st.push(ch);
+            }
+        }
+        while (!st.isEmpty()) out.append(st.pop());
+        return out.toString();
+    }
+
+    static int prec(char c) {
+        switch (c) {
+            case '+': case '-': return 1;
+            case '*': case '/': return 2;
+            case '^':           return 3; // treated LEFT-associative by the pop rule above
+            default:            return -1;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String exp = sc.nextLine();
+        System.out.println(Solution.infixToPostfix(exp));
+    }
+}
