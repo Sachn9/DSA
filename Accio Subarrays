@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Accio{
+    static int AccioSubarrays(int N, int[] arr){
+        //write code here
+        int n = arr.length;
+        if(n < 3) return 0;
+
+        int count = 0;
+        int len = 2;
+        int diff = arr[1] - arr[0];
+
+        for(int i = 2; i < n; i++){
+            if(arr[i] - arr[i-1] == diff){
+                len++;
+                count += (len - 2);
+            } else {
+                diff = arr[i] - arr[i-1];
+                len = 2; 
+            }
+        }
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0;i<n;++i){
+            arr[i] = sc.nextInt();
+        }
+        Accio obj = new Accio();
+        int ans = obj.AccioSubarrays(n,arr);
+        System.out.println(ans);
+    }
+}
