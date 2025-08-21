@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public int findPairs(int[] arr, int B) {
+        Arrays.sort(arr);
+        int left = 0, right = 1;
+        int count = 0;
+
+        while (left < arr.length && right < arr.length) {
+            int diff = arr[right] - arr[left];
+
+            if (diff == B && left != right) {
+                count++;
+                int leftVal = arr[left], rightVal = arr[right];
+
+                // skip duplicates safely
+                while (left < arr.length && arr[left] == leftVal) left++;
+                while (right < arr.length && arr[right] == rightVal) right++;
+            } else if (diff < B) {
+                right++;
+            } else {
+                left++;
+            }
+
+            if (left == right) right++;
+        }
+        return count;
+    }
+}
