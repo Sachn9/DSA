@@ -1,0 +1,30 @@
+import java.util.HashMap;
+
+class Solution {
+    public int countVowelSubstrings(String word) {
+        int count = 0;
+        int n = word.length();
+
+        for (int i = 0; i < n; i++) {
+            HashSet<Character> set = new HashSet<>();
+
+            for (int j = i; j < n; j++) {
+                char ch = word.charAt(j);
+
+                if ("aeiou".indexOf(ch) == -1) {
+                    break; 
+                }
+
+
+                set.add(ch);
+                if (set.contains('a') && set.contains('e') &&
+                    set.contains('i') && set.contains('o') &&
+                    set.contains('u')) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
