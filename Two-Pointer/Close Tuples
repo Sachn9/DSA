@@ -1,0 +1,32 @@
+ import java.util.*;
+
+class Solution{
+public static void solve(int n, int[] arr) {
+        // Your code here
+        Arrays.sort(arr);
+        long count=0;
+        int left=0;
+        for(int j=0;j<n;j++){
+            while(left<n && arr[left]-arr[j]<=2){
+                left++;
+            }
+
+            int len=left-j;
+            if(len>=3){
+                count += (long)(len-1)*(len-2)/2;
+            }
+        }
+        System.out.println(count);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Solution.solve(n, arr);
+    }
+}
