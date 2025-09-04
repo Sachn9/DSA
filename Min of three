@@ -1,0 +1,24 @@
+import java.util.*;
+
+class Solution{
+    int minOfThree(int a,int b,int c){
+        // write code here
+        int val=Math.min(a,b);
+        return Math.min(val,c);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            Solution Obj = new Solution();
+            System.out.println(Obj.minOfThree(a,b,c));
+        }
+    }
+}
+
