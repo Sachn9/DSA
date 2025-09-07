@@ -1,0 +1,73 @@
+import java.util.*;
+import java.io.*;
+
+class Solution {
+    Node exchangeNodes(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        int nodeData = head.data;
+        head.data = temp.data;
+        temp.data = nodeData;
+
+        return head;
+    }
+}
+
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data = data;
+        next = null;
+    }
+}
+class LinkedList{
+    Node head;
+    int sz = 0;
+    void add(int data ){
+        sz++;
+        Node new_node = new Node(data);
+        if(head == null){
+            head = new_node;
+            return;
+        }
+        Node current = head;
+        while(current.next !=null){
+            current = current.next;
+        }
+        current.next = new_node;
+    }
+    void print(Node node){
+        while(node != null){
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+
+    }
+}
+ 
+public class Main {
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        LinkedList ll = new LinkedList();
+
+        for (int i = 0; i < n; i++) {
+            ll.add(input.nextInt());
+        }
+
+        Solution obj = new Solution();
+        ll.head = obj.exchangeNodes(ll.head);  // Pass ll.head, get modified ll.head
+
+        ll.print(ll.head);
+    }
+}
+
