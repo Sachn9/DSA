@@ -1,0 +1,11 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        // Your code here
+        Scanner sc=new Scanner(System.in);
+        float n=sc.nextFloat();
+        int result = (int) n;
+        System.out.println(result);
+    }
+}
