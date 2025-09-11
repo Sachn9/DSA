@@ -1,0 +1,31 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+class Solution{
+    public static void findMaxAverage(int n, int[] nums, int k) {
+        // Your code here
+        long sum=0;
+        for (int right = 0; right <= nums.length - k; right++) {
+            long dummySum = 0;
+            for (int i = right; i < right + k; i++) {
+                dummySum += nums[i];
+            }
+            sum = Math.max(sum, dummySum);
+        }
+        double maxAverage = (double) sum / k;
+        System.out.printf("%.5f\n", maxAverage);
+
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i =0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+        int k = sc.nextInt();
+        Solution.findMaxAverage(n, arr, k);   
+    }
+}
