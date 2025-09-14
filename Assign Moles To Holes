@@ -1,0 +1,43 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution{
+        public static int mice(int[] A, int[] B) {
+               // write code here
+        Arrays.sort(A);
+        Arrays.sort(B);
+
+        int maxTime = 0;
+        for (int i = 0; i < A.length; i++) {
+            int time = Math.abs(A[i] - B[i]);
+            if (time > maxTime) {
+                maxTime = time;
+            }
+        }
+
+        return maxTime;
+    }
+}
+
+public class Main {
+  
+  public static void main (String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+	    
+	    	int n = sc.nextInt();
+			int[] A = new int[n];
+			for(int i=0; i<n;i++)
+			{
+				A[i] = sc.nextInt();
+			}
+			int[] B = new int[n];
+			for(int i=0; i<n;i++)
+			{
+				B[i] = sc.nextInt();
+			}
+            Solution Obj = new Solution();
+			System.out.println(Obj.mice(A, B));
+	    }
+}
