@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+    public static boolean OneChild(int[] pre, int n) {
+        for (int i = 0; i < n - 1; i++) {
+            int next = pre[i+1];
+            int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+            for (int j = i+1; j < n; j++) {
+                min = Math.min(min, pre[j]);
+                max = Math.max(max, pre[j]);
+            }
+            // If pre[i] lies between min and max, it must have 2 children
+            if (pre[i] > min && pre[i] < max) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] pre = new int[n];
+        for (int i = 0; i < n; i++) {
+            pre[i] = sc.nextInt();
+        }
+        System.out.println(OneChild(pre, n));
+    }
+}
