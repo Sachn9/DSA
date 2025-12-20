@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+ class Solution{
+ static String solve(String s){
+       // Write your code here
+        String result = "";
+        StringBuilder st=new StringBuilder();
+        for(int i=s.length()-1;i>=0;i--){
+            char ch=s.charAt(i);
+            if(ch !='.'){
+               result = ch+result;
+            }else{
+                st.append(result);
+                st.append(ch);
+                result =new String("");
+            }
+        }
+        st.append(result);
+        return st.toString();
+    
+    }
+}
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter wr = new PrintWriter(System.out);
+         String s = br.readLine();
+ 
+         String out_ = Solution.solve(s);
+         System.out.println(out_);
+ 
+         wr.close();
+         br.close();
+    }
+}
+
