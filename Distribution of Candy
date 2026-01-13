@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+	public static void main (String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	   
+        int n=sc.nextInt(); 
+        ArrayList<Integer> arr= new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            int x=sc.nextInt();
+            arr.add(x);
+        }
+        
+        Solution ob=new Solution();
+        System.out.println(ob.candies(arr,n));
+        
+	}
+}
+
+
+class Solution {
+    public int candies(ArrayList<Integer> A, int n) {
+
+        int[] candy = new int[n];
+
+        // Step 1: sabko 1 candy
+        Arrays.fill(candy, 1);
+
+        // Step 2: left se check
+        for (int i = 1; i < n; i++) {
+            if (A.get(i) > A.get(i - 1)) {
+                candy[i] = candy[i - 1] + 1;
+            }
+        }
+
+        // Step 3: right se check
+        for (int i = n - 2; i >= 0; i--) {
+            if (A.get(i) > A.get(i + 1)) {
+                candy[i] = Math.max(candy[i], candy[i + 1] + 1);
+            }
+        }
+
+        // Step 4: sum
+        int sum = 0;
+        for (int c : candy) {
+            sum += c;
+        }
+
+        return sum;
+    }
+}
+
