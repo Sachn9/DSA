@@ -1,0 +1,23 @@
+import java.util.*;
+
+class Solution {
+    static void powerAtoB(int a, int b) {
+        long result = 1;
+
+        for (int i = 1; i <= b; i++) {
+            result = result * a;
+        }
+
+        System.out.println(result);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        Solution Obj = new Solution();
+        Obj.powerAtoB(a, b);
+    }
+}
