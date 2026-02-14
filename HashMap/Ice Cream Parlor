@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+class Main{
+    public static void main(String args[])throws IOException
+    {
+        Scanner sc=new Scanner(System.in);
+        int N=sc.nextInt();
+        int M=sc.nextInt();
+        int cost[]=new int[N];
+        for(int i=0;i<N;i++)
+        {
+            cost[i]=sc.nextInt();
+        }
+
+        Solution obj=new Solution();
+        obj.solve(cost,N,M);
+        
+    }
+}
+
+
+class Solution{
+    static void solve(int cost[],int N,int M)
+    {
+        // your code here
+        Map<Integer,Integer> map=new HashMap<>();
+        int firstIdx=Integer.MAX_VALUE;
+        int secondIdx=Integer.MAX_VALUE;
+        for(int i=0;i<N;i++){
+            int complement=M-cost[i];
+
+            if(map.containsKey(complement)){
+                int preIdx=map.get(complement);
+
+
+                if(preIdx<firstIdx || preIdx==firstIdx && i<secondIdx){
+                    firstIdx=preIdx;
+                    secondIdx=i;
+                }
+            }
+
+            if(!map.containsKey(cost[i])) {
+                map.put(cost[i], i);
+            }
+        }
+
+        System.out.println((firstIdx + 1) + " " + (secondIdx + 1));
+    }
+}
