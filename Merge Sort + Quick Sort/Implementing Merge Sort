@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+
+class Solution {
+    static void mergeSort(int[] arr,int l,int r){
+     // Your code here
+     devide(arr,l,r);
+    }
+
+    public static void devide(int arr[],int l,int r){
+        int mid=l+(r-l)/2;
+
+        if(l>=r){
+            return;
+        }
+        devide(arr,l,mid);
+        devide(arr,mid+1,r);
+
+        conquer(arr,l,mid,r);
+    }
+
+    public static void conquer(int[] arr,int l,int mid,int r){
+        int [] mrged=new int[r-l+1];
+        int idx1=l;
+        int idx2=mid+1;
+        int x=0;
+
+        while(idx1<=mid && idx2<=r){
+            if(arr[idx1]<=arr[idx2]){
+                mrged[x++]=arr[idx1++];
+            }else{
+                mrged[x++]=arr[idx2++];
+            }
+        }
+        while(idx1<=mid){
+            mrged[x++]=arr[idx1++];
+        }
+
+        while(idx2<=r){
+            mrged[x++]=arr[idx2++];
+        }
+
+        for(int i=0,j=l;i<mrged.length;i++,j++){
+            arr[j]=mrged[i];
+        }
+    }
+}
+public class Main {
+    public static void main(String args[]) {
+        Scanner input=new Scanner(System.in);
+        int n=input.nextInt();
+        int[] a=new int[n];
+        for(int i= 0; i < n; i++)
+            a[i] = input.nextInt();
+        Solution Obj = new Solution();
+        Obj.mergeSort(a,0,n-1);
+        for (int i = 0; i < n; i++)
+            System.out.print(a[i] + " ");
+    }
+}
