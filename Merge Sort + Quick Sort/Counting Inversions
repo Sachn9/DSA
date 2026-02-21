@@ -1,0 +1,71 @@
+import java.util.*;
+class Main{
+	public static void main(String[] args){
+		try (Scanner sc = new Scanner(System.in)) {
+			int t=sc.nextInt();
+			while(t>0){
+				int n=sc.nextInt();
+				int []A=new int[n];
+				for(int i=0;i<n;i++){
+					A[i]=sc.nextInt();
+				}
+				Solution ob =new Solution();
+				int ans = ob.CountingInversions(A,0,n-1);
+                System.out.print(ans);
+                System.out.println();
+				t--;
+			}
+		}
+	}
+
+}
+class Solution {
+	int count=0;
+    public int CountingInversions(int[] arr,int l,int r) {
+        //Write code here
+		devide(arr,l,r);
+		
+		return count;
+	}
+
+	public void devide(int arr [],int st,int end){
+		int mid=st+(end-st)/2;
+		if(st>=end){
+			return;
+		}
+
+		devide(arr,st,mid);
+		devide(arr,mid+1,end);
+
+		conquer(arr,st,mid,end);
+	}
+
+	public void conquer(int arr [],int st,int mid,int end){
+		int [] merged=new int[end-st+1];
+
+		int idx1=st;
+		int idx2=mid+1;
+		int x=0;
+
+		while(idx1<=mid && idx2<=end ){
+			if(arr[idx1]<=arr[idx2]){
+				merged[x++]=arr[idx1++];
+			}else{
+				merged[x++]=arr[idx2++];
+				count += (mid - idx1 + 1);
+			}
+		}
+
+		while(idx1<=mid){
+			merged[x++]=arr[idx1++];
+		}
+
+		while(idx2<=end){
+			merged[x++]=arr[idx2++];
+		}
+
+		for(int i=0,j=st;i<merged.length;i++,j++){
+			arr[j]=merged[i];
+		}
+	}
+}
