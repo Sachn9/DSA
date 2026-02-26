@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Solution solution = new Solution();
+        System.out.println(solution.excelColumnNumber(s));
+    }
+}
+class Solution {
+    static long excelColumnNumber(String s) {
+        long res=0;
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+
+            long val=ch-'A'+1;
+            res=res*26+val;
+        }
+
+        return res;
+
+    }
+}
