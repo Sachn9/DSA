@@ -1,0 +1,38 @@
+import java.util.*;
+import java.io.*;
+ 
+class Solution{
+    static String solve(String [] a){
+        
+        boolean increasing = true;
+        boolean decreasing = true;
+        
+        for(int i = 0; i < a.length - 1; i++){
+            
+            // Agar current > next hai to increasing nahi ho sakta
+            if(a[i].compareTo(a[i+1]) > 0){
+                increasing = false;
+            }
+            
+            // Agar current < next hai to decreasing nahi ho sakta
+            if(a[i].compareTo(a[i+1]) < 0){
+                decreasing = false;
+            }
+        }
+        
+        if(increasing) return "INCREASING";
+        else if(decreasing) return "DECREASING";
+        else return "NEITHER";
+    }
+}
+public class Main {
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        String[] a = new String[n];
+        for(int i = 0; i < n; i++){
+            a[i] = input.next();
+        }
+        System.out.println(Solution.solve(a));
+    }
+}
