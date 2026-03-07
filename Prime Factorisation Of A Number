@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+class Solution {
+    public void solve(Scanner sc) {
+        // write your code here
+        int n=sc.nextInt();
+
+        ArrayList<Integer> list=new ArrayList<>();
+
+        int i=2;
+        while(n>1){
+            if(n%i==0){
+                list.add(i);
+                n=n/i;
+            }else{
+                i=i+1;
+            }
+        }
+        i=0;
+        while(i<list.size()){
+            System.out.print(list.get(i)+" ");
+            i++;
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Solution solution = new Solution();
+        solution.solve(sc);
+    }
+}
