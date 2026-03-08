@@ -1,0 +1,40 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main {
+
+    public static int sqrt(int A) {
+
+        int left = 0;
+        int right = A;
+        int ans = 0;
+
+        while(left <= right){
+
+            int mid = left + (right - left) / 2;
+
+            long square = (long) mid * mid;
+
+            if(square == A){
+                return mid;
+            }
+            else if(square < A){
+                ans = mid;       // possible answer
+                left = mid + 1;
+            }
+            else{
+                right = mid - 1;
+            }
+        }
+
+        return ans;   // floor sqrt
+    }
+
+    public static void main (String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int A = sc.nextInt();
+        System.out.println(sqrt(A));
+    }
+}
