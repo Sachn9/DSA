@@ -1,0 +1,32 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main
+{
+    
+    public static void main (String[] args) throws IOException{
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        Solution obj=new Solution();
+
+        System.out.println(obj.solve(n));
+    
+    }
+}
+
+class Solution
+{
+    public int solve(int n)
+    {
+        // your code here
+        int power = 1;
+
+        while (power < n) {
+            power *= 2;
+        }
+
+        return power;
+    }
+    
+}
