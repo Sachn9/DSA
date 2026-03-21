@@ -1,0 +1,24 @@
+static int triangle(int a, int b, int c){
+    // Find largest side
+    int max = Math.max(a, Math.max(b, c));
+    
+    int x, y;
+    
+    if(max == a){
+        x = b;
+        y = c;
+    } else if(max == b){
+        x = a;
+        y = c;
+    } else {
+        x = a;
+        y = b;
+    }
+    
+    int maxSq = max * max;
+    int sumSq = x * x + y * y;
+    
+    if(maxSq < sumSq) return 1;   // Acute
+    else if(maxSq == sumSq) return 2; // Right
+    else return 3;  // Obtuse
+}
