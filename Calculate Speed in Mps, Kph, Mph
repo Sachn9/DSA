@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+ 
+
+class Solution {
+    public void solve(double distance,int hours,int minutes,int seconds) {
+        
+        int totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+        double speedMps = distance / totalSeconds;
+        double speedKph = speedMps * 3.6;
+        double speedMph = speedMps * 3600 / 1609;
+
+        // print in ONE LINE with \n as text
+        System.out.printf(
+            "Your speed in meters/second is %.8f/nYour speed in km/h is %.7f/nYour speed in miles/h is %.7f",
+            speedMps, speedKph, speedMph
+        );
+    }
+}
+public class Main {
+    
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        double distance=sc.nextDouble();
+        int hours=sc.nextInt();
+        int minutes=sc.nextInt();
+        int seconds=sc.nextInt();
+        Solution Ob=new Solution();
+        Ob.solve(distance,hours,minutes,seconds);
+       
+
+    }
+}
