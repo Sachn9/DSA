@@ -1,0 +1,117 @@
+import java.util.LinkedList; 
+import java.util.Queue; 
+import java.io.*;
+import java.util.*;
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}
+
+class Main {
+    static Node treeBuilder(String str){  
+        if(str.length()==0 || str.charAt(0)=='-'){
+            return null;
+        }
+        String ip[] = str.split(" ");
+        Node root = new Node(Integer.parseInt(ip[0]));
+        Queue<Node> queue = new LinkedList<>(); 
+        queue.add(root);
+        int i = 1;
+        while(queue.size()>0 && i < ip.length) {
+            Node currNode = queue.peek();
+            queue.remove();
+
+            String currVal = ip[i];
+            if(!currVal.equals("-1")) {
+                currNode.left = new Node(Integer.parseInt(currVal));
+                queue.add(currNode.left);
+            }
+            i++;
+
+            if(i >= ip.length)
+                break;
+
+            currVal = ip[i];
+            if(!currVal.equals("-1")) {
+                currNode.right = new Node(Integer.parseInt(currVal));
+                queue.add(currNode.right);
+            }
+            i++;
+        }
+        
+        return root;
+    }
+    
+    public static void main (String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while(t > 0){
+            String s = br.readLine();
+            Node root = treeBuilder(s);
+
+            Solution g = new Solution();
+            int ans = g.largestBSTBTutil(root);
+
+            System.out.println(ans);
+            t--;
+        }
+    }
+}
+
+class Solution{
+
+    static class Info {
+        boolean isBST;
+        int size;
+        int min;
+        int max;
+
+        Info(boolean isBST, int size, int min, int max) {
+            this.isBST = isBST;
+            this.size = size;
+            this.min = min;
+            this.max = max;
+        }
+    }
+
+    static int maxSize;
+
+    public static int largestBSTBTutil(Node root){
+        maxSize = 0;
+        solve(root);
+        return maxSize;
+    }
+
+    public static Info solve(Node root){
+        // base case
+        if(root == null){
+            return new Info(true, 0, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        }
+
+        Info left = solve(root.left);
+        Info right = solve(root.right);
+
+        // check BST condition
+        if(left.isBST && right.isBST && root.data > left.max && root.data < right.min){
+
+            int size = left.size + right.size + 1;
+            maxSize = Math.max(maxSize, size);
+
+            int min = Math.min(root.data, left.min);
+            int max = Math.max(root.data, right.max);
+
+            return new Info(true, size, min, max);
+        }
+
+        // not BST
+        return new Info(false, Math.max(left.size, right.size), 0, 0);
+    }
+}
