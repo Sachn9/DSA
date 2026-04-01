@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+    public static void main(String args[]) throws IOException {
+        Scanner sc = new Scanner(System.in);
+    
+        int n=sc.nextInt();
+        
+        Accio A= new Accio();
+        
+        String ans=A.evenOrOdd(n);
+
+        System.out.println(ans);
+    }
+}
+
+
+class Accio {
+    String evenOrOdd(int n)
+    {
+        // Your code 
+        if(n%2==0){
+            return "Even";
+        }else{
+            return "Odd";
+        }
+        
+    }
+}
