@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Pair{
+    int a;
+    int b;
+    Pair(int a,int b){
+        this.a=a;
+        this.b=b;
+    }
+}
+class Solution {
+    static Pair swap(Pair swapValues) {
+        //Write your code here
+        int temp=swapValues.a;
+        swapValues.a=swapValues.b;
+        swapValues.b=temp;
+        return swapValues;
+
+        
+
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        Pair ans = Solution.swap(new Pair(a,b));
+        System.out.println(ans.a + " " + ans.b);
+    }
+}
