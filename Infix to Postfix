@@ -1,0 +1,56 @@
+import java.util.*;
+
+class Solution {
+    static String infixToPostfix(String exp) {
+        //Write your code here
+        StringBuilder sb=new StringBuilder();
+        Stack<Character> st=new Stack<>();
+
+        for(int i=0;i<exp.length();i++){
+            char ch=exp.charAt(i);
+
+            if(ch>='A' && ch<='Z'){
+                sb.append(ch);
+            }else if(ch=='('){
+                st.push(ch);
+            }else if(ch==')'){
+                while(st.peek()!='('){
+                    sb.append(st.pop());
+                }
+                st.pop();
+            }else{
+                while(st.size()!=0 && chkPrority(st.peek())>=chkPrority(ch)){
+                    sb.append(st.pop());
+                }
+                st.push(ch);
+            }
+        }
+        while(st.size()!=0){
+            sb.append(st.pop());
+        }
+
+        return sb.toString();
+    }
+
+    public static int chkPrority(char ch){
+        if(ch=='^'){
+            return 3;
+        }else if(ch=='/'||ch=='*'){
+            return 2;
+        }else if(ch=='+' || ch=='-'){
+            return 1;
+        }else{ 
+            return 0;
+        }
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String exp = sc.nextLine();
+        Solution Obj = new Solution();
+        System.out.println(Obj.infixToPostfix(exp));
+    }
+}
