@@ -1,0 +1,53 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class Main
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        PrintWriter out=new PrintWriter(System.out);
+        
+        //taking testcases
+    
+        String str=br.readLine();
+        int n=Integer.parseInt(str);
+        Stack<Integer> stack=new Stack<>();
+        String str1=br.readLine();
+        String[] starr1=str1.split(" ");
+        
+        for(int j=0;j<n;j++)
+        {
+            stack.push(Integer.parseInt(starr1[j]));
+        }
+        
+        Solution.reverse(stack);
+        for(int j:stack){
+            out.print(j+" ");
+        }
+        out.println();
+         
+        out.close();
+    }
+}
+
+class Solution
+{ 
+    
+    static void reverse(Stack<Integer> s)
+{
+    int i = 0;
+    int j = s.size() - 1;
+
+    while(i < j) {
+        int temp = s.get(i);
+        s.set(i, s.get(j));
+        s.set(j, temp);
+
+        i++;
+        j--;
+    }
+}
+
+}
