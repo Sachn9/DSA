@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Solution {
+    public int MinOps(String a, String b) {
+        int n = a.length();
+        if (n != b.length()) return -1;
+
+        int[] freq = new int[256];
+
+        for (int i = 0; i < n; i++) {
+            freq[a.charAt(i)]++;
+            freq[b.charAt(i)]--;
+        }
+
+        for (int x : freq) {
+            if (x != 0) return -1;
+        }
+
+        int i = 0, j = 0;
+
+        while (i < n && j < n) {
+            if (a.charAt(i) == b.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                i++;
+            }
+        }
+
+        return n - j;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        String b = sc.next();
+
+        Solution obj = new Solution();
+        System.out.println(obj.MinOps(a, b));
+    }
+}
