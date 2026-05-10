@@ -1,0 +1,91 @@
+import java.util.*;
+
+class Solution {  
+    void pairWiseSwap(Node head) {
+
+        Node sp = head;
+
+        while (sp != null && sp.next != null) {
+
+            Node fp = sp.next;
+
+            // swap data
+            int temp = sp.data;
+            sp.data = fp.data;
+            fp.data = temp;
+
+            // move to next pair
+            sp = fp.next;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+
+            int n = sc.nextInt();
+
+            LinkedList llist = new LinkedList();
+
+            int a1 = sc.nextInt();
+
+            Node head = new Node(a1);
+            llist.addToTheLast(head);
+
+            for (int i = 1; i < n; i++) {
+                int a = sc.nextInt();
+                llist.addToTheLast(new Node(a));
+            }
+
+            Solution A = new Solution();
+
+            A.pairWiseSwap(llist.head);
+
+            llist.printList();
+        }
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+class LinkedList {
+
+    Node head;
+    Node tail;
+
+    public void addToTheLast(Node node) {
+
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
+    }
+
+    void printList() {
+
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+
+        System.out.println();
+    }
+}
