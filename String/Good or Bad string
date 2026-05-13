@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+    
+    public static void solve(String s){
+    	// Write code here
+        int vowel=0;
+        int consonent=0;
+
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+
+            //count vowel
+            if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u' || ch=='?'){
+                vowel++;
+
+            }else{
+                vowel=0;
+            }
+
+            //count consonent
+            if(ch!='a' && ch!='e' && ch!='i' && ch!='o' && ch!='u'){
+                consonent++;
+            }else{
+                consonent=0;
+            }
+
+            if(vowel>5 || consonent>3){
+                System.out.println(0);
+                return;
+            }
+        }
+        System.out.println(1);
+    }
+
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+        String s = input.next();
+        solve(s);
+        
+    }
+}
