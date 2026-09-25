@@ -1,0 +1,61 @@
+import java.util.*;
+
+class Solution {
+    
+    public static ArrayList<String> ValidIP(String s) {
+        ArrayList<String> ans = new ArrayList<>();
+        solve(s, 0, 0, "", ans);
+        return ans;
+    }
+
+    static void solve(String s, int index, int parts, String current,
+                      ArrayList<String> ans) {
+
+        // 4 parts complete
+        if (parts == 4) {
+            if (index == s.length()) {
+                ans.add(current.substring(0, current.length() - 1));
+            }
+            return;
+        }
+
+        // Try 1, 2, or 3 digits
+        for (int len = 1; len <= 3; len++) {
+
+            if (index + len > s.length()) {
+                break;
+            }
+
+            String part = s.substring(index, index + len);
+
+            // Leading zero is not allowed
+            if (part.length() > 1 && part.charAt(0) == '0') {
+                continue;
+            }
+
+            // Value must be <= 255
+            int value = Integer.parseInt(part);
+
+            if (value > 255) {
+                continue;
+            }
+
+            solve(s,index + len,parts + 1,current + part + ".",ans);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+
+        Solution obj = new Solution();
+
+        ArrayList<String> ans = obj.ValidIP(s);
+
+        for (String i : ans) {
+            System.out.println(i);
+        }
+    }
+}
