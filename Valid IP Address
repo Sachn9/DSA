@@ -1,0 +1,76 @@
+import java.util.*;
+
+class Solution {
+    
+    public static ArrayList<String> ValidIP(String s) {
+        
+        ArrayList<String> res = new ArrayList<>();
+        
+        generateIp(s, 0, 0, "", res);
+        
+        return res;
+    }
+
+    public static void generateIp(String s, int stIdx, int parts,
+                                  String curr, ArrayList<String> ans) {
+
+        // 4 parts complete
+        if (parts == 4) {
+
+            // Check whether entire string is used
+            if (stIdx == s.length()) {
+                ans.add(curr.substring(0, curr.length() - 1));
+            }
+
+            return;
+        }
+
+        // Try 1, 2 and 3 digits
+        for (int i = 1; i <= 3; i++) {
+
+            // Prevent substring going out of bounds
+            if (stIdx + i > s.length()) {
+                break;
+            }
+
+            String st = s.substring(stIdx, stIdx + i);
+
+            // Leading zero check
+            if (st.length() > 1 && st.charAt(0) == '0') {
+                continue;
+            }
+
+            int digit = Integer.parseInt(st);
+
+            // IP part must be <= 255
+            if (digit > 255) {
+                continue;
+            }
+
+            generateIp(
+                s,
+                stIdx + i,
+                parts + 1,
+                curr + st + ".",
+                ans
+            );
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Throwable {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        String s = sc.nextLine();
+        
+        Solution obj = new Solution();
+        
+        ArrayList<String> ans = obj.ValidIP(s);
+        
+        for (String i : ans) {
+            System.out.println(i);
+        }
+    }
+}
