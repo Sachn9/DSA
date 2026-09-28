@@ -1,0 +1,67 @@
+import java.util.*;
+
+class Solution {
+    public int bagsWithCapacity(int rocks[], int capacity[],  int additionalRocks) {
+      // Your code here
+
+      int n=capacity.length;
+        int [] bags=new int[n];
+
+        int i=0;
+        while(i<n){
+            bags[i]=capacity[i]-rocks[i];
+            i++;
+        }
+
+        Arrays.sort(bags);
+
+        int j=0;
+        while(additionalRocks>0 && j<n){
+            int val=bags[j];
+            if(val==0){
+                j++;
+            }else{
+                if(additionalRocks>=val){
+                    additionalRocks=additionalRocks-val;
+                    bags[j]=0;
+                    j++;
+                }else{
+                    break;
+                }
+            }
+        }
+        int count=0;
+        for(i=0;i<n;i++){
+            if(bags[i]==0){
+                count++;
+            }else{
+                break;
+            }
+        }
+
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+
+        int capacity[]=new int[N];
+        int rocks[]=new int[N];
+        for(int i = 0; i < N; i++)
+        {
+            capacity[i] = sc.nextInt();
+        }
+        for(int i = 0; i < N; i++)
+        {
+            rocks[i] = sc.nextInt();
+        }
+        int additional_rocks=sc.nextInt();
+        Solution Obj = new Solution();
+        int ans = Obj.bagsWithCapacity(rocks, capacity, additional_rocks);
+        System.out.println(ans); 
+        sc.close();
+    }
+}
