@@ -1,0 +1,30 @@
+function isPalindrome(s) {
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    const ch1 = s.charAt(left);
+    const ch2 = s.charAt(right);
+
+    if (ch1 !== ch2) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+}
+
+/* Do not change the code below  */
+
+const rl = require("readline");
+const reader = rl.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+reader.on("line", function (line) {
+  console.log(isPalindrome(line));
+  reader.close();
+});
