@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+class Solution {
+    public void solve(Scanner sc) {
+        // write your code here
+        int a=sc.nextInt();
+        int b=sc.nextInt();
+
+        int min=Math.min(a,b);
+        int gcd=Integer.MIN_VALUE;
+        for(int i=1;i<=min;i++){
+            if(a%i==0 && b%i==0){
+                gcd=Math.max(gcd,i);
+            }
+        }
+
+        int lcm=(int)(a*b)/gcd;
+        System.out.println(gcd);
+        System.out.println(lcm);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Solution solution = new Solution();
+        solution.solve(sc);
+    }
+}
