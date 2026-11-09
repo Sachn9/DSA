@@ -1,0 +1,28 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        
+        int maxLen = 0;  // To track the length of the longest substring
+        int i = 0;  // Left pointer for the sliding window
+
+        // Iterate through the string with the right pointer (j)
+        for (int j = 0; j < s.length(); j++) {
+            char ch = s.charAt(j);
+            
+            // If the character is already in the current window, update the left pointer (i)
+            if (map.containsKey(ch) && map.get(ch) >= i) {
+                // Move the left pointer to the right of the last occurrence of ch
+                i = map.get(ch) + 1;
+            }
+
+            // Update the character's most recent index in the map
+            map.put(ch, j);
+
+            // Calculate the length of the current valid window (substring)
+            int len = j - i + 1;
+            maxLen = Math.max(maxLen, len);  // Update maxLen if we found a longer substring
+        }
+
+        return maxLen;
+    }
+}
