@@ -1,0 +1,24 @@
+class Solution {
+    public int reverse(int x) {
+        int sign = (x < 0) ? -1 : 1;
+    x = Math.abs(x);
+
+    Stack<Integer> stack = new Stack<>();
+    while(x > 0) {
+        stack.push(x % 10);
+        x /= 10;
+    }
+
+    long reversed = 0;
+    long place = 1;
+    while(!stack.isEmpty()){
+        reversed += stack.pop() * place;
+        place *= 10;
+        if(reversed * sign > Integer.MAX_VALUE || reversed * sign < Integer.MIN_VALUE) {
+            return 0;
+        }
+    }
+
+    return (int)reversed * sign;
+    }
+}
