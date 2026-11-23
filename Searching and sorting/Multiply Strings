@@ -1,0 +1,27 @@
+class Solution {
+    public String multiply(String num1, String num2) {
+        int n=num1.length();
+        int m=num2.length();
+        int [] arr=new int[n+m];
+        for(int i=n-1;i>=0;i--){
+            char chi=num1.charAt(i);
+            int val1=chi-'0';
+            for(int j=m-1;j>=0;j--){
+                char chj=num2.charAt(j);
+                int val2=chj-'0';
+                int mul=val1*val2+arr[i+j+1];
+                arr[i+j+1]=mul%10;
+                arr[i+j] +=mul/10;
+            }
+        }
+
+        StringBuilder st=new StringBuilder();
+        for(int num : arr){
+            if(!(st.length() ==0 && num==0)){
+                st.append(num);
+            }
+        }
+
+        return st.length()==0 ? "0":st.toString();
+    }
+}
